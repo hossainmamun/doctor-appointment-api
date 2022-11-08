@@ -3,12 +3,20 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+// routers
+const userRouter = require("./routes/userRoute.js");
+const appointmentRouter = require("./routes/appointmentRoute.js");
+
 // express app
 const app = express();
 
 // use middleware
 app.use(cors());
 app.use(express.json());
+
+// use routers
+app.use("/api/user", userRouter);
+app.use("/api/patient/appointment", appointmentRouter);
 
 // server route
 app.get("/", async (req, res) => {
