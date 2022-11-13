@@ -12,6 +12,7 @@ const createAppointment = async (req, res) => {
     professionals,
     appointment_date,
     appointment_time,
+    gender
   } = req.body;
   try {
     const appointment = await appointmentSchema.create({
@@ -24,6 +25,7 @@ const createAppointment = async (req, res) => {
       professionals,
       appointment_date,
       appointment_time,
+      gender
     });
     res.status(201).json(appointment);
   } catch (error) {

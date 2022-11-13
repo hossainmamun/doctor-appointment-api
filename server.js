@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 // routers
 const userRouter = require("./routes/userRoute.js");
 const appointmentRouter = require("./routes/appointmentRoute.js");
+const professionalRouter = require("./routes/professionalRoute.js");
+const bannerRouter = require("./routes/bannerRouter.js");
 
 // express app
 const app = express();
@@ -14,17 +16,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// use routers
-app.use("/api/user", userRouter);
-app.use("/api/patient/appointment", appointmentRouter);
-
 // server route
 app.get("/", async (req, res) => {
   res.status(200).json({
-    message: "<h>welcome to doctor appointment</h>",
+    message: "welcome to doctor appointment",
     today: new Date().toLocaleDateString(),
   });
 });
+
+// use routers
+app.use("/api/user", userRouter);
+app.use("/api/patient/appointment", appointmentRouter);
+app.use("/api/professional", professionalRouter);
+app.use("/api/banner", bannerRouter);
 
 // database connection
 mongoose
