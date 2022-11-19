@@ -3,14 +3,15 @@ const professionalSchema = require("../models/professionalModel.js");
 // create professionals
 const createProfessional = async (req, res) => {
   const {
-    professional_image,
+    imgUrl,
     professional_name,
     professional_designation,
     professional_degree,
   } = req.body;
+  
   try {
     const professional = await professionalSchema.create({
-      professional_image,
+      imgUrl,
       professional_name,
       professional_designation,
       professional_degree,
@@ -48,7 +49,7 @@ const getSingleProfessional = async (req, res) => {
 const updateProfessional = async (req, res) => {
   const professionalId = req.params.id;
   const {
-    professional_image,
+    imgUrl,
     professional_name,
     professional_designation,
     professional_degree,
@@ -58,7 +59,7 @@ const updateProfessional = async (req, res) => {
     const professional = await professionalSchema.findByIdAndUpdate(
       { _id: professionalId },
       {
-        professional_image,
+        imgUrl,
         professional_name,
         professional_designation,
         professional_degree,

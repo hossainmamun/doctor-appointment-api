@@ -33,7 +33,7 @@ const appointmentValidation = yup.object().shape({
 
 // professional validation
 const professionalValidation = yup.object().shape({
-  professional_image: yup.string().required("image is required"),
+  imgUrl: yup.string().required("image is required"),
   professional_name: yup
     .string()
     .max(24)
@@ -50,8 +50,8 @@ const professionalValidation = yup.object().shape({
 
 // banner validation
 const bannerValidation = yup.object().shape({
-  banner_image: yup.string().required("image is required"),
-  banner_title: yup.string().max(40).required("image is required"),
+  imgUrl: yup.string().required("image is required"),
+  banner_title: yup.string().max(200).required("image is required"),
   banner_detail: yup.string().max(500).required("image is required"),
 });
 

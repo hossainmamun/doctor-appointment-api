@@ -17,12 +17,21 @@ const userModel = new mongoose.Schema(
       type: String,
       require: true,
     },
+    isAdmin: {
+      type: Boolean,
+      require: true,
+    },
   },
   { timestamps: true }
 );
 
 // user statics signup function
-userModel.statics.signup = async function (user_name, email, password) {
+userModel.statics.signup = async function (
+  user_name,
+  email,
+  password,
+  isAdmin
+) {
   // check existing email
   const existing = await this.findOne({ email: email });
   if (existing) {
@@ -38,6 +47,7 @@ userModel.statics.signup = async function (user_name, email, password) {
     user_name,
     email,
     password: hashPassword,
+    isAdmin,
   });
 
   return user;

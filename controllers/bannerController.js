@@ -2,14 +2,20 @@ const bannerSchema = require("../models/bannerModel.js");
 
 // create banner
 const createBanner = async (req, res) => {
-  const { banner_image, banner_title, banner_detail } = req.body;
+  const { imgUrl, banner_title, banner_detail } = req.body;
+
   try {
-    const banner = await bannerSchema.create({
-      banner_image,
-      banner_title,
-      banner_detail,
-    });
-    res.status(201).json(banner);
+    const findBanner = await bannerSchema.find({});
+    if (findBanner.length === 0) {
+      const banner = await bannerSchema.create({
+        imgUrl,
+        banner_title,
+        banner_detail,
+      });
+      res.status(201).json(banner);
+    } else {
+      res.status(401).json({ error: "Sorry multiple banner is not allow" });
+    }
   } catch (error) {
     res.status(401).json({ error: error.message });
   }
@@ -39,12 +45,12 @@ const getSingleBanner = async (req, res) => {
 // update a banner
 const updateBanner = async (req, res) => {
   const bannerId = req.params.id;
-  const { banner_image, banner_title, banner_detail } = req.body;
+  const { imgUrl, banner_title, banner_detail } = req.body;
 
   try {
     const banner = await bannerSchema.findByIdAndUpdate(
       { _id: bannerId },
-      { banner_image, banner_title, banner_detail },
+      { imgUrl, banner_title, banner_detail },
       { returnOriginal: false }
     );
 

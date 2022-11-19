@@ -5,6 +5,7 @@ const {
   getAnAppointment,
   updateAnAppointment,
   deleteAnAppointment,
+  getAppointmentByEmail,
 } = require("../controllers/appointmentController.js");
 const validation = require("../middlewares/validationMiddleware.js");
 const { appointmentValidation } = require("../validation/validation.js");
@@ -24,6 +25,9 @@ appointmentRouter.get("/", getAppointmentList);
 
 // get single appointment by id
 appointmentRouter.get("/:id", getAnAppointment);
+
+// get appointment by email
+appointmentRouter.post("/:email", getAppointmentByEmail);
 
 // update an appointment
 appointmentRouter.patch("/:id", updateAnAppointment);

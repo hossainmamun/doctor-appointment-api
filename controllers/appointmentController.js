@@ -12,7 +12,7 @@ const createAppointment = async (req, res) => {
     professionals,
     appointment_date,
     appointment_time,
-    gender
+    gender,
   } = req.body;
   try {
     const appointment = await appointmentSchema.create({
@@ -25,7 +25,7 @@ const createAppointment = async (req, res) => {
       professionals,
       appointment_date,
       appointment_time,
-      gender
+      gender,
     });
     res.status(201).json(appointment);
   } catch (error) {
@@ -48,6 +48,18 @@ const getAnAppointment = async (req, res) => {
   const patientId = req.params.id;
   try {
     const appointment = await appointmentSchema.findById({ _id: patientId });
+    res.status(200).json(appointment);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// get appointment by user email
+const getAppointmentByEmail = async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const appointment = await appointmentSchema.find({ email: email });
     res.status(200).json(appointment);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -111,4 +123,5 @@ module.exports = {
   getAnAppointment,
   updateAnAppointment,
   deleteAnAppointment,
+  getAppointmentByEmail,
 };

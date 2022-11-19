@@ -16,12 +16,12 @@ const createToken = (_id) => {
 
 // signup controller
 const userSignup = async (req, res) => {
-  const { user_name, email, password } = req.body;
+  const { user_name, email, password, isAdmin } = req.body;
 
   try {
-    const user = await userModel.signup(user_name, email, password);
+    const user = await userModel.signup(user_name, email, password, isAdmin);
     const token = createToken(user._id);
-    res.status(201).json({ user_name, email, token });
+    res.status(201).json({ user_name, email, isAdmin, token });
   } catch (error) {
     res.status(401).json({ error: error.message });
   }
@@ -34,7 +34,8 @@ const userLogin = async (req, res) => {
     const user = await userModel.login(email, password);
     const token = createToken(user._id);
     const user_name = user.user_name;
-    res.status(200).json({ user_name, email, token });
+    const isAdmin = user.isAdmin;
+    res.status(200).json({ user_name, email, isAdmin, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

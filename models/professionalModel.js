@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // professionals Schema
 const professionalSchema = new mongoose.Schema(
   {
-    professional_image: {
+    imgUrl: {
       type: String,
       require: true,
     },
